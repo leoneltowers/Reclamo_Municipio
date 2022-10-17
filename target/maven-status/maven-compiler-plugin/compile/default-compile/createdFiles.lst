@@ -1,1 +1,5 @@
-com\leonel\reclamo_municipio\resources\RegistroServlet.class
+com\leonel\reclamo_municipio\controlador\RegistroServlet.class
+com\leonel\reclamo_municipio\modelo\PersonaDAO.class
+com\leonel\reclamo_municipio\modelo\ReclamoDTO.class
+com\leonel\reclamo_municipio\modelo\ReclamoDAO.class
+com\leonel\reclamo_municipio\modelo\PersonaDTO.class
