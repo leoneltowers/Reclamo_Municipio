@@ -13,7 +13,7 @@
 <jsp:include page="pages/partesIdem/inicioHead.jsp"/>
 <title> Municipalidad de La Matanza</title>
 <jsp:include page="pages/partesIdem/finHead.jsp"/>
-<!-- <jsp:include page="pages/partesIdem/nav.jsp"/>-->
+
  
       <div class="container mt-4 col-lg-4">
           <div class="card col-sm-10 bg-secondary">
@@ -35,12 +35,17 @@
                       <br>
                       <input type="submit" name="accion" Value="Ingresar" class="btn btn-primary btn-block">
                       <a href="pages/formulario.html">Registrar Usuario</a>
+                      
+                      <a href="Contribuyente.jsp">Contribuyente</a>
+                      <a href="Administrador.jsp">Administrador</a>
                   </form>
                   
               </div>
           </div>
-          
+          <br><br><br>
+      
       </div>
+
     
 <jsp:include page="pages/partesIdem/footer.jsp"/>
 

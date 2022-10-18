@@ -1,3 +1,17 @@
+<%-- 
+    Document   : Principal
+    Created on : 17 oct. 2022, 01:29:03
+    Author     : Leonel_Towers
+--%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+<jsp:include page="pages/partesIdem/inicioHTML.jsp"/>
+
+<jsp:include page="pages/partesIdem/inicioHead.jsp"/>
+<title>Principal</title>
+<jsp:include page="pages/partesIdem/finHead.jsp"/>
+
+
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-info">
@@ -20,10 +34,10 @@
           
         </li>
         <li class="nav-item">
-          <a style = "margin-left:10px; border:none" class="btn btn-outline-light" href="Reclamo.jsp" target="frame">Mis reclamos</a>
+          <a style = "margin-left:10px; border:none" class="btn btn-outline-light" href="#" target="frame">Personas</a>
         </li>
         <li class="nav-item">
-          <a style = "margin-left:10px; border:none" class="btn btn-outline-light" href="GenerarReclamo.jsp" target="frame">Nuevo reclamo</a>
+          <a style = "margin-left:10px; border:none" class="btn btn-outline-light" href="GenerarReclamo.jsp" target="frame">Reclamos</a>
          
         </li>
       </ul>
@@ -51,3 +65,7 @@
         <iframe name="frame" style="height: 100%; width: 100%"></iframe>
         
 </div>
+
+<jsp:include page="pages/partesIdem/footer.jsp"/>
+
+<jsp:include page="pages/partesIdem/finHTML.jsp"/>   
