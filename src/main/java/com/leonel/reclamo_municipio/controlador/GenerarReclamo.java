@@ -4,8 +4,12 @@
  */
 package com.leonel.reclamo_municipio.controlador;
 
+
+import com.leonel.reclamo_municipio.modelo.Modelo;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
+import java.util.Properties;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,8 +20,10 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Leonel_Towers
  */
-@WebServlet(name = "Controlador", urlPatterns = {"/Controlador"})
-public class Controlador extends HttpServlet {
+@WebServlet(name = "GenerarReclamo", urlPatterns = {"/reclamos"})
+public class GenerarReclamo extends HttpServlet {
+    private Modelo modelo; 
+    private final String URI_INGRESAR = "AdministrarReclamo.jsp";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,37 +37,11 @@ public class Controlador extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-//        String menu = request.getParameter("menu");
-        String accion = request.getParameter("accion");
-        switch (accion) {
-            case "Principal":
-                request.getRequestDispatcher("Principal.jsp").forward(request, response);
-                
-                break;
-            case "Reclamo":
-                request.getRequestDispatcher("Reclamo.jsp").forward(request, response);
-                
-                break;
-            case "GenerarReclamo":
-                request.getRequestDispatcher("GenerarReclamo.jsp").forward(request, response);
-                
-                break;    
-            default:
-                throw new AssertionError();
-        }
         
-        
-//        if(menu.equals("Principal")){
-//        request.getRequestDispatcher("Principal.jsp").forward(request, response);
-//        }
-//        if(menu.equals("Reclamo")){
-//        request.getRequestDispatcher("Reclamo.jsp").forward(request, response);
-//        }
-//        if(menu.equals("GenerarReclamo")){
-//        request.getRequestDispatcher("GenerarReclamo.jsp").forward(request, response);
-//        }
-        
-        
+    }
+    
+    public void init()throws ServletException{
+        this.modelo= new Modelo();
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -76,7 +56,12 @@ public class Controlador extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        System.out.println("hghghghg");
+    request.setAttribute("listaReclamos", modelo.getReclamos());
+    request.getRequestDispatcher(URI_INGRESAR).forward(request, response);
+    
+    
+
     }
 
     /**
@@ -102,5 +87,8 @@ public class Controlador extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+    
+    
+    
 
 }
