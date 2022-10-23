@@ -8,6 +8,7 @@ public class PersonaDTO {
     private String apellido;
     private String mail;
     private String telefonoMovil;
+    private UsuarioDTO ususario;
 
     public PersonaDTO() {
     }

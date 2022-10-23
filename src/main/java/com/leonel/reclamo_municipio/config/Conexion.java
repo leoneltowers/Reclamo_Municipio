@@ -11,8 +11,10 @@ import java.sql.DriverManager;
  *
  * @author Leonel_Towers
  */
+
 public class Conexion {
-        private static Connection con;
+
+    private static Connection con;
     
     private Conexion(){}
 
@@ -48,5 +50,4 @@ public class Conexion {
             }
         }
     }
-    
 }

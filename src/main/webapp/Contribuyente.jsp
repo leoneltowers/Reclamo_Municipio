@@ -1,3 +1,4 @@
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%-- 
     Document   : Principal
     Created on : 17 oct. 2022, 01:29:03
@@ -34,10 +35,10 @@
           
         </li>
         <li class="nav-item">
-          <a style = "margin-left:10px; border:none" class="btn btn-outline-light" href="#" target="frame">Personas</a>
+          <a style = "margin-left:10px; border:none" class="btn btn-outline-light"  href="#" target="frame">CONTRIBUYENTE</a>
         </li>
         <li class="nav-item">
-          <a style = "margin-left:10px; border:none" class="btn btn-outline-light" href="GenerarReclamo.jsp" target="frame">Reclamos</a>
+          <a style = "margin-left:10px; border:none" class="btn btn-outline-light" href="${pageContext.request.contextPath}/reclamos?accion=listar" target="frame">Reclamos</a>
          
         </li>
       </ul>
@@ -46,12 +47,14 @@
     <!-- perfil-salir -->
     <div class="dropdown">
         <button style ="border:none" class="btn btn-outline-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-          Usuario Ingresado
+          ${usuario.getUser()}
         </button>
          <ul class="dropdown-menu text-center">
              <li><a class="dropdown-item" href="#">Usuario</a></li>
              <li><a class="dropdown-item" href="#">user@gmail.com</a></li>
-             <li><a class="dropdown-item" href="#">Salir</a></li>
+             <form action="validar" method="POST">
+                 <button name="accion" value="Salir" class="dropdown-item" href="#">Salir</button>
+             </form>
          </ul>
     </div>
     

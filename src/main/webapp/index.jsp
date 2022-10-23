@@ -3,7 +3,7 @@
     Created on : 16 oct 2022, 14:59:41
     Author     : Leonel_Towers
 --%>
-
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -18,7 +18,7 @@
       <div class="container mt-4 col-lg-4">
           <div class="card col-sm-10 bg-secondary">
               <div class="card-body">
-                  <form class="form-sing" action="Controlador" method="post">
+                  <form class="form-sing" action="validar" method="post">
                       <div class="form-group text-center">
                           <h3>Login</h3>
                           <img src="img/logo-left.png" alt="logo_municipalidad" width="300"/>
@@ -36,7 +36,7 @@
                       <input type="submit" name="accion" Value="Ingresar" class="btn btn-primary btn-block">
                       <a href="pages/formulario.html">Registrar Usuario</a>
                       
-                      <a href="${pageContext.request.contextPath}/reclamos">Contribuyente</a>
+                      <a href="${pageContext.request.contextPath}/validar">Contribuyente</a>
                       
                       
                       <a href="Administrador.jsp">Administrador</a>

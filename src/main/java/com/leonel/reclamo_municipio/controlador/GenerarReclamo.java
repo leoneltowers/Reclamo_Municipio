@@ -6,9 +6,13 @@ package com.leonel.reclamo_municipio.controlador;
 
 
 import com.leonel.reclamo_municipio.modelo.Modelo;
+import com.leonel.reclamo_municipio.modelo.ReclamoDAO;
+import com.leonel.reclamo_municipio.modelo.ReclamoDTO;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
+import java.util.List;
 import java.util.Properties;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,17 +27,12 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "GenerarReclamo", urlPatterns = {"/reclamos"})
 public class GenerarReclamo extends HttpServlet {
     private Modelo modelo; 
-    private final String URI_INGRESAR = "AdministrarReclamo.jsp";
-
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+    private final String URI_INGRESAR = "Contribuyente.jsp";
+    private final String URI_RECLAMOS = "GenerarReclamo.jsp";
+    
+    ReclamoDTO rec = new ReclamoDTO();
+    ReclamoDAO recdao = new ReclamoDAO();
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -56,13 +55,38 @@ public class GenerarReclamo extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        System.out.println("hghghghg");
-    request.setAttribute("listaReclamos", modelo.getReclamos());
-    request.getRequestDispatcher(URI_INGRESAR).forward(request, response);
+       
+        //request.setAttribute("listaReclamos", modelo.getReclamos());
+        //request.getRequestDispatcher(URI_INGRESAR).forward(request, response);
+        String accion = request.getParameter("accion");
+        //String tipoModelo = request.getParameter("modelo");
+        accion = accion == null ? "" : accion;
+        switch (accion) {
+            case "ver":
+                request.getRequestDispatcher(URI_RECLAMOS).forward(request, response);
+                
+                //revisar luego sacar
+                break;
+            case "listar":
+                List lista=recdao.listar();
+                request.setAttribute("listarReclamos", lista);
+                request.getRequestDispatcher(URI_RECLAMOS).forward(request, response);
+                
+                break;    
+                
+            case "agregar":
+                String fechaCreacion = request.getParameter("txt")
+                
+                break;
+     
+        }
+        //doGet(request, response);
+    }
+    
     
     
 
-    }
+    
 
     /**
      * Handles the HTTP <code>POST</code> method.

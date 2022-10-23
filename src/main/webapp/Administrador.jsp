@@ -33,7 +33,7 @@
           <a  style = "margin-left:10px; border:none" class="btn btn-outline-light" href="#" target="frame">Inicio</a>
         </li>
         <li class="nav-item">
-          <a style = "margin-left:10px; border:none" class="btn btn-outline-light" href="#" target="frame">Personas</a>
+          <a style = "margin-left:10px; border:none" class="btn btn-outline-light" href="#" target="frame">ADMINISTRADOR</a>
         </li>
         <li class="nav-item">
           <a style = "margin-left:10px; border:none" class="btn btn-outline-light" href="AdministrarReclamo.jsp" target="frame">Reclamos</a>
@@ -44,12 +44,15 @@
     <!-- perfil-salir -->
     <div class="dropdown">
         <button style ="border:none" class="btn btn-outline-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-          Usuario Ingresado
+          ${usuario.getUser()}
         </button>
          <ul class="dropdown-menu text-center">
              <li><a class="dropdown-item" href="#">Usuario</a></li>
              <li><a class="dropdown-item" href="#">user@gmail.com</a></li>
-             <li><a class="dropdown-item" href="#">Salir</a></li>
+             <form>
+                 <button name="accion" value="Salir" class="dropdown-item" href="#">Salir</button>
+             </form>
+             
          </ul>
     </div>
     
