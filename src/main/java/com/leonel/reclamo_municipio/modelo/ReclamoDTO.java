@@ -2,7 +2,7 @@ package com.leonel.reclamo_municipio.modelo;
 
 import java.io.Serializable;
 
-public class ReclamoDTO implements Serializable {
+public class ReclamoDTO  {//implements Serializable
 
     private int idReclamo;
     private String fechaCreacion;

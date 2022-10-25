@@ -3,7 +3,7 @@
     Created on : 17 oct. 2022, 15:18:17
     Author     : Leonel_Towers
 --%>
-
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <jsp:include page="pages/partesIdem/inicioHTML.jsp"/>
 
 <jsp:include page="pages/partesIdem/inicioHead.jsp"/>
@@ -15,25 +15,23 @@
       <div class="d-flex">
     <div class="card col-sm-4">
       <div class="card-body">
-        <form action="">
+          <form action="${pageContext.request.contextPath}/administrar?accion=uptade&idReclamo=${editarReclamo.idReclamo}" method="POST" class="was-validated">
+             
           <div class="form-group">
             <label>Fecha Creacion</label>
-            <input type="text" name="txtFechaCreacion" class="form-control">
+            <input type="text"    Value="${editarReclamo.fechaCreacion}" name="txtFechaCreacion" class="form-control">
           </div>
-            <div class="form-group">
-            <label>Fecha Resolucion</label>
-            <input type="text" name="txtFechaResolucion" class="form-control">
-          </div>  
           <div class="form-group">
-            <label>Categoria</label>
-            <input type="text" name="txtTipo" class="form-control">
-          </div>
+            <label>Fecha Resolucion</label>
+            <input type="text" value="${editarReclamo.fechaResolucion}" name="txtFechaResolucion" class="form-control">
+          </div>  
+          <!-- falta categoria pendiente.... -->
           <div class="form-group">
             <label>Domicilio</label>
-            <input type="text" name="txtIdReclamo" class="form-control">
+            <input type="text" value="${editarReclamo.idReclamo}" name="txtDomicilio" class="form-control">
           </div>
           <label></label>
-          <input type="submit" name="" value="Actualizar" class="btn btn-info">
+          <button type="submit" class="btn btn-success">Actualizar</button>
         </form>
       </div>
     </div>
@@ -52,17 +50,19 @@
         </thead>
         
         <tbody>
+           <c:forEach var="rec" items="${listarReclamos}" > 
             <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                    <td>${rec.idReclamo}</td>
+                    <td>${rec.fechaCreacion}</td>
+                    <td>${rec.fechaResolucion}</td>
+                    <td>PENDIENTE</td>
+                    <td>${rec.domicilio}</td>
                 <td>
-                    <a class="btn btn-warning" href="#">Editar</a>
-                    <a class="btn btn-danger" href="#">Eliminar</a>
+                    <a class="btn btn-warning" href="${pageContext.request.contextPath}/administrar?accion=edit&idReclamo=${rec.idReclamo}">Editar</a>
+                    <a class="btn btn-danger"    href="${pageContext.request.contextPath}/administrar?delete&idReclamo=${rec.idReclamo}">Eliminar</a>
                 </td>
             </tr>
+          </c:forEach>  
         </tbody>
       
 

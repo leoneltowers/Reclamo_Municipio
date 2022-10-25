@@ -14,7 +14,7 @@
   <div class="d-flex">
     <div class="card col-sm-4">
      <div class="card-body">
-        <form action="">
+         <form action="reclamos" method="POST">
           <div class="form-group">
             <label>Fecha Creacion</label>
             <input type="text" name="txtFecha class="form-control">
@@ -26,10 +26,10 @@
           </div>
           <div class="form-group">
             <label>Domicilio</label>
-            <input type="text" name="txtIdReclamo" class="form-control">
+            <input type="text" name="txtDomicilio" class="form-control">
           </div>
           <label></label>
-          <input type="submit" name="" value="Agregar" class="btn btn-info">
+          <input type="submit" name="accion" value="Agregar" class="btn btn-info">
         </form>
       </div>
     </div>
@@ -49,7 +49,7 @@
         
         <tbody> 
            <c:forEach var="rec" items="${listarReclamos}" > 
-              <tr>
+                <tr>
                     <td>${rec.getIdReclamo()}</td>
                     <td>${rec.getFechaCreacion()}</td>
                     <td>${rec.getFechaResolucion()}</td>

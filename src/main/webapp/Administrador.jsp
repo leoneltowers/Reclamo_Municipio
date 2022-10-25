@@ -36,7 +36,7 @@
           <a style = "margin-left:10px; border:none" class="btn btn-outline-light" href="#" target="frame">ADMINISTRADOR</a>
         </li>
         <li class="nav-item">
-          <a style = "margin-left:10px; border:none" class="btn btn-outline-light" href="AdministrarReclamo.jsp" target="frame">Reclamos</a>
+          <a style = "margin-left:10px; border:none" class="btn btn-outline-light" href="${pageContext.request.contextPath}/administrar?accion=listar" target="frame">Reclamos</a>
         </li>
       </ul>
       <!-- fin vav -->

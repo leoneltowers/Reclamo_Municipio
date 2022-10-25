@@ -74,10 +74,14 @@ public class GenerarReclamo extends HttpServlet {
                 
                 break;    
                 
-            case "agregar":
-                String fechaCreacion = request.getParameter("txt")
-                
-                break;
+//            case "agregar":
+//                String fechaCreacion = request.getParameter("txtFecha");
+//                String domicilio = request.getParameter("txtDomicilio");
+//                rec.setFechaCreacion(fechaCreacion);
+//                rec.setDomicilio(domicilio);
+//                recdao.agregar(rec);
+//                request.getRequestDispatcher("reclamos?accion=listar");
+//                break;
      
         }
         //doGet(request, response);
@@ -99,7 +103,32 @@ public class GenerarReclamo extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String accion = request.getParameter("action");
+        //String tipoModelo = request.getParameter("modelo");
+        accion = accion == null ? "" : accion;
+        switch (accion) {
+//            case "ver":
+//                request.getRequestDispatcher(URI_RECLAMOS).forward(request, response);
+//                
+//                //revisar luego sacar
+//                break;
+//            case "listar":
+//                List lista=recdao.listar();
+//                request.setAttribute("listarReclamos", lista);
+//                request.getRequestDispatcher(URI_RECLAMOS).forward(request, response);
+//                
+//                break;    
+                //pendiente
+            case "agregar":
+                String fechaCreacion = request.getParameter("txtFecha");
+                String domicilio = request.getParameter("txtDomicilio");
+                rec.setFechaCreacion(fechaCreacion);
+                rec.setDomicilio(domicilio);
+                recdao.agregar(rec);
+                request.getRequestDispatcher("reclamos?accion=listar");
+                break;
+     
+        }
     }
 
     /**

@@ -40,22 +40,95 @@ public class ReclamoDAO {
     }
     
     public int agregar (ReclamoDTO rec){
-        String sql = "insert into reclamos (fechaCreacion, fechaResolucion, domicilio) values(?,?,?))";
+        String sql = "INSERTAR INTO reclamos VALUES(null,?,null,?))";//(fechaCreacion, fechaResolucion, domicilio) 
         try{
            Connection con = Conexion.getConexion(DRIVER, URL, USER, PASS);
             
             PreparedStatement ps = con.prepareStatement(sql);// where where user=? and password=?
             ResultSet rs = ps.executeQuery();
             ps.setString(1, rec.getFechaCreacion());
-            ps.setString(1, rec.getFechaResolucion());
+            //ps.setString(1, rec.getFechaResolucion());
             ps.setString(1, rec.getDomicilio());
+            
+          
+        } catch (SQLException e) {
+            throw new RuntimeException("Erros al obtener/agregar reclamos");
+        }
+        return resp;
+    }
+    
+    public int actualizar (ReclamoDTO rec){
+        int reclModificados=0;
+        String sql = "UPTADE reclamos SET fechaCreacion=?, fechaResolucion=?,domicilio=? WHERE idReclamo=?";//(fechaCreacion, fechaResolucion, domicilio) 
+        try( Connection con = Conexion.getConexion(DRIVER, URL, USER, PASS); PreparedStatement ps = con.prepareStatement(sql)){//where where user=? and password=?
+           
+            
+            ps.setString(1, rec.getFechaCreacion());
+            ps.setString(2, rec.getFechaResolucion());
+            ps.setString(3, rec.getDomicilio());
+            ps.setInt(4, rec.getIdReclamo());
+            
+            ps.executeUpdate();
+        }catch(SQLException ex){
+           throw new RuntimeException("Error SQL",ex);
+        } catch (Exception e) {
+            throw new RuntimeException("Error al actualizar reclamos", e);
+        }
+        return reclModificados;
+    }
+    
+    public void eliminar (int id){
+        String sql = "DELETE FROM reclamos where idReclamo="+id;//(fechaCreacion, fechaResolucion, domicilio) 
+        try{
+           Connection con = Conexion.getConexion(DRIVER, URL, USER, PASS);
+            
+            PreparedStatement ps = con.prepareStatement(sql);// where where user=? and password=?
+            ps.executeUpdate();
           
         } catch (SQLException e) {
             throw new RuntimeException("Erros al obtener/agregar reclamos");
         }
         
-    return resp;
     }
+    
+    
+    public ReclamoDTO getReclamo(int id){
+        ReclamoDTO rec= new ReclamoDTO();
+        try {
+            Connection con = Conexion.getConexion(DRIVER, URL, USER, PASS);
+            
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM reclamos WHERE idReclamo=?");// where where user=? and password=?
+            ps.setInt(1, id);
+            
+            try( ResultSet rs = ps.executeQuery()){
+                rs.next();
+                
+                rec.setIdReclamo(rs.getInt(1));
+                rec.setFechaCreacion(rs.getString(2));
+                rec.setFechaResolucion(rs.getString(3));
+                rec.setDomicilio(rs.getString(4));
+                
+                
+            } catch (Exception e) {
+                throw new RuntimeException("Error SQL", e);
+            }
+            
+//                               
+//            while (rs.next()) {
+//                //rec.setIdReclamo(rs.getInt(1));
+//                rec.setIdReclamo(rs.getInt(1));
+//                rec.setFechaCreacion(rs.getString(2));
+//                rec.setFechaResolucion(rs.getString(3));
+//                rec.setDomicilio(rs.getString(4));
+//                
+//            }
+          
+        } catch (SQLException e) {
+            throw new RuntimeException("Error al obtener reclamos");
+        }
+        return rec;
+    }
+    
     
     
     
