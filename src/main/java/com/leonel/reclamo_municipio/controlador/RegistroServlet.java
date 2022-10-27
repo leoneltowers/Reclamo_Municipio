@@ -24,43 +24,80 @@ import javax.servlet.http.HttpServletResponse;
 public class RegistroServlet extends HttpServlet {
 
     private final String URI_PERS = "RegistrarPersona.jsp";
-    PersonaDAO persdao = new PersonaDAO();
+    private PersonaDAO persona;
+    
+    public void init() throws ServletException{
+    this.persona = new PersonaDAO();
+    }
+    
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //processRequest(request, response);
-    }
-
-    
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        String accion=request.getParameter("accion");
+        
+         String accion=request.getParameter("accion");
       
         accion = accion == null ? "" : accion;
         
         switch (accion) {
-            case "agregarPersona":
+            case "editPersona":
                 
-                PersonaDTO persona = new PersonaDTO();
-                cargarPersonaSegunParams(persona, request);
-                persdao.agregar(persona);
+//                PersonaDTO persona = new PersonaDTO();
+//                cargarPersonaSegunParams(persona, request);
+//                persdao.agregar(persona);
                 request.getRequestDispatcher(URI_PERS).forward(request, response);
                 break;
                 
-            case "agregarUsuario":
+            case "editUsuario":
                 request.getRequestDispatcher(URI_PERS).forward(request, response);
                 break;    
         }
       doGet(request, response);
     }
 
+    
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        PersonaDTO pers;
+        
+         String accion=request.getParameter("accion");
+      
+        accion = accion == null ? "" : accion;
+        
+        switch (accion) {
+            case "agregarPersona":
+                
+                pers = new PersonaDTO();
+                cargarPersonaSegunParams(pers, request);
+                persona.agregarPersona(pers);
+                //request.getRequestDispatcher(URI_PERS).forward(request, response);
+                
+//                String dni= request.getParameter("dni");
+//                String nom=request.getParameter("nombre");
+//                String ape=request.getParameter("apellido");
+//                String email=request.getParameter("email");
+//                String tel= request.getParameter("telefono");
+//        
+//                pers.setDni(dni);
+//                pers.setNombre(nom);
+//                pers.setApellido(ape);
+//                pers.setMail(email);
+//                pers.setTelefonoMovil(email);
+                
+                
+                break;
+        }
+        
+       
+    }
+
     private void cargarPersonaSegunParams(PersonaDTO per, HttpServletRequest request) {
         per.setDni(request.getParameter("dni"));
         per.setNombre(request.getParameter("nom"));
         per.setApellido(request.getParameter("ape"));
-        per.setMail(request.getParameter("mail"));
+        per.setMail(request.getParameter("email"));
         per.setTelefonoMovil(request.getParameter("tel"));
     }    
         
