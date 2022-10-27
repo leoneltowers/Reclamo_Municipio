@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "AdministrarReclamo", urlPatterns = {"/administrar"})
 public class AdministrarReclamo extends HttpServlet {
-    private final String URI_ADMIN_REC = "AdministrarReclamo.jsp";
+    private final String URI_ADMIN_REC = "EditarReclamo.jsp";
     ReclamoDTO rec = new ReclamoDTO();
     ReclamoDAO recdao = new ReclamoDAO();
     int ide;
@@ -65,18 +65,21 @@ public class AdministrarReclamo extends HttpServlet {
                 ide=Integer.parseInt(request.getParameter("idReclamo"));
                 recl= recdao.getReclamo(ide);
                 request.setAttribute("editarReclamo", recl);
-                request.getRequestDispatcher("administrar?accion=listar").forward(request, response);    
+                request.getRequestDispatcher("administrar?accion=listar").forward(request, response); 
+                break;
+                
+            case "delete":
+                ide=Integer.parseInt(request.getParameter("idReclamo"));
+                recdao.eliminar(ide);
+                request.getRequestDispatcher("administrar?accion=listar").forward(request, response);
+                
+                               
+                break;    
         }
+        
+        
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -92,38 +95,50 @@ public class AdministrarReclamo extends HttpServlet {
                 //request.getRequestDispatcher("administrar?accion=listar").forward(request, response);
                 
 //                break;
-            case "uptade":
+            case "update":
                 ide=Integer.parseInt(request.getParameter("idReclamo"));
-                recl = recdao.getReclamo(ide);
-                String fechaCreacion = request.getParameter("txtFechaCreacion");
-                String fecharesolucion = request.getParameter("txtFechaResolucion");
-                //String categoria = request.getParameter("txtCategoria");
-                String domicilio = request.getParameter("txtDomicilio");
-                recl.setFechaCreacion(fechaCreacion);
-                recl.setFechaResolucion(fecharesolucion);
-                //rec.setFechaCreacion(categoria);//cambiar
-                recl.setDomicilio(domicilio);
-                //recl.setIdReclamo(ide);
-               
-                recdao.actualizar(recl);
-                request.getRequestDispatcher("administrar?accion=listar").forward(request, response); 
+                rec = recdao.getReclamo(ide);
+                cargarReclamosegunParams(rec, request);
+                recdao.actualizar(rec);        
+//                String fechaCreacion = request.getParameter("txtFechaCreacion");
+//                String fecharesolucion = request.getParameter("txtFechaResolucion");
+//                //String categoria = request.getParameter("txtCategoria");
+//                String domicilio = request.getParameter("txtDomicilio");
+//                rec.setFechaCreacion(fechaCreacion);
+//                rec.setFechaResolucion(fecharesolucion);
+//                //rec.setFechaCreacion(categoria);//cambiar
+//                rec.setDomicilio(domicilio);
+//                //rec.setIdReclamo(ide);
+//                //recdao.agregar(rec); 
+                
+                
+                //request.getRequestDispatcher("administrar?accion=listar").forward(request, response); 
                 
                                
                 break;
                 
-            case "delete":
-                ide=Integer.parseInt(request.getParameter("idReclamo"));
-                recdao.eliminar(ide);
-                               
+            case "add":
+                recl=new ReclamoDTO();
+                cargarReclamosegunParams(recl, request);
+                recdao.agregar(recl);
+                
                 break;
         }        
+        doGet(request, response);
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
+    
+    
+    private void cargarReclamosegunParams(ReclamoDTO rec, HttpServletRequest request) {
+        
+        rec.setFechaCreacion(request.getParameter("txtFechaCreacion"));
+        rec.setFechaResolucion(request.getParameter("txtFechaResolucion"));
+        //rec.setFechaCreacion(categoria);//cambiar
+        rec.setDomicilio(request.getParameter("txtDomicilio"));
+        //rec.setIdReclamo(ide);
+         
+    }
+    
     @Override
     public String getServletInfo() {
         return "Short description";

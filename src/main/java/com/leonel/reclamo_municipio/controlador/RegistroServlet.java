@@ -4,8 +4,12 @@
  */
 package com.leonel.reclamo_municipio.controlador;
 
+import com.leonel.reclamo_municipio.modelo.PersonaDAO;
+import com.leonel.reclamo_municipio.modelo.PersonaDTO;
+import com.leonel.reclamo_municipio.modelo.ReclamoDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,6 +23,8 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "RegistroServlet", urlPatterns = {"/registrarUsuario"})
 public class RegistroServlet extends HttpServlet {
 
+    private final String URI_PERS = "RegistrarPersona.jsp";
+    PersonaDAO persdao = new PersonaDAO();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -30,29 +36,39 @@ public class RegistroServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
+        String accion=request.getParameter("accion");
+      
+        accion = accion == null ? "" : accion;
         
-        String nombre = request.getParameter("nom");
-        String apellido = request.getParameter("ape");
-        String email = request.getParameter("nom");
-        String password = request.getParameter("pass");
-        String Rpassword = request.getParameter("rpass");
-        PrintWriter out = response.getWriter();
-        
-        
-        out.println("<html>hola" +nombre + "" + apellido+ "</html>");
-        
-      //  processRequest(request, response);
+        switch (accion) {
+            case "agregarPersona":
+                
+                PersonaDTO persona = new PersonaDTO();
+                cargarPersonaSegunParams(persona, request);
+                persdao.agregar(persona);
+                request.getRequestDispatcher(URI_PERS).forward(request, response);
+                break;
+                
+            case "agregarUsuario":
+                request.getRequestDispatcher(URI_PERS).forward(request, response);
+                break;    
+        }
+      doGet(request, response);
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
+    private void cargarPersonaSegunParams(PersonaDTO per, HttpServletRequest request) {
+        per.setDni(request.getParameter("dni"));
+        per.setNombre(request.getParameter("nom"));
+        per.setApellido(request.getParameter("ape"));
+        per.setMail(request.getParameter("mail"));
+        per.setTelefonoMovil(request.getParameter("tel"));
+    }    
+        
+   
     @Override
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
 
+    
 }

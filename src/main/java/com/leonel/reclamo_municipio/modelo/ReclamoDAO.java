@@ -1,7 +1,6 @@
 package com.leonel.reclamo_municipio.modelo;
 
 import com.leonel.reclamo_municipio.config.Conexion;
-import com.leonel.reclamo_municipio.modelo.ReclamoDTO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -34,7 +33,7 @@ public class ReclamoDAO {
             }
           
         } catch (SQLException e) {
-            throw new RuntimeException("Erros al obtener reclamos");
+            throw new RuntimeException("Error al obtener reclamos");
         }
         return lista;
     }
@@ -47,28 +46,23 @@ public class ReclamoDAO {
             PreparedStatement ps = con.prepareStatement(sql);// where where user=? and password=?
             ResultSet rs = ps.executeQuery();
             ps.setString(1, rec.getFechaCreacion());
-            //ps.setString(1, rec.getFechaResolucion());
+            ps.setString(1, rec.getFechaResolucion());
             ps.setString(1, rec.getDomicilio());
             
           
         } catch (SQLException e) {
-            throw new RuntimeException("Erros al obtener/agregar reclamos");
+            throw new RuntimeException("Error al obtener/agregar reclamos");
         }
         return resp;
     }
     
-    public int actualizar (ReclamoDTO rec){
+    public int actualizar (ReclamoDTO reclamo){
         int reclModificados=0;
-        String sql = "UPTADE reclamos SET fechaCreacion=?, fechaResolucion=?,domicilio=? WHERE idReclamo=?";//(fechaCreacion, fechaResolucion, domicilio) 
-        try( Connection con = Conexion.getConexion(DRIVER, URL, USER, PASS); PreparedStatement ps = con.prepareStatement(sql)){//where where user=? and password=?
-           
-            
-            ps.setString(1, rec.getFechaCreacion());
-            ps.setString(2, rec.getFechaResolucion());
-            ps.setString(3, rec.getDomicilio());
-            ps.setInt(4, rec.getIdReclamo());
-            
-            ps.executeUpdate();
+        //String sql = "UPDATE reclamos SET fechaCreacion=?, fechaResolucion=?,domicilio=? WHERE idReclamo=?";//(fechaCreacion, fechaResolucion, domicilio) 
+        try( Connection con = Conexion.getConexion(DRIVER, URL, USER, PASS); PreparedStatement ps = con.prepareStatement("UPDATE reclamos SET fechaCreacion=?, fechaResolucion=?,domicilio=? WHERE idReclamo=?")){//here where user=? and password=?
+            fillPreparedStatement(ps, reclamo);
+            ps.setInt(4, reclamo.getIdReclamo());
+            reclModificados=ps.executeUpdate();
         }catch(SQLException ex){
            throw new RuntimeException("Error SQL",ex);
         } catch (Exception e) {
@@ -78,21 +72,22 @@ public class ReclamoDAO {
     }
     
     public void eliminar (int id){
-        String sql = "DELETE FROM reclamos where idReclamo="+id;//(fechaCreacion, fechaResolucion, domicilio) 
+        String sql = "DELETE FROM reclamos where idReclamo=?";//aCreacion, fechaResolucion, domicilio) 
         try{
            Connection con = Conexion.getConexion(DRIVER, URL, USER, PASS);
-            
+                       
             PreparedStatement ps = con.prepareStatement(sql);// where where user=? and password=?
+           ps.setInt(1, id);
             ps.executeUpdate();
           
         } catch (SQLException e) {
-            throw new RuntimeException("Erros al obtener/agregar reclamos");
+            throw new RuntimeException("Error al eliminar");
         }
         
     }
     
     
-    public ReclamoDTO getReclamo(int id){
+     public ReclamoDTO getReclamo(int id){
         ReclamoDTO rec= new ReclamoDTO();
         try {
             Connection con = Conexion.getConexion(DRIVER, URL, USER, PASS);
@@ -101,27 +96,14 @@ public class ReclamoDAO {
             ps.setInt(1, id);
             
             try( ResultSet rs = ps.executeQuery()){
-                rs.next();
-                
+                rs.next(); 
                 rec.setIdReclamo(rs.getInt(1));
                 rec.setFechaCreacion(rs.getString(2));
                 rec.setFechaResolucion(rs.getString(3));
                 rec.setDomicilio(rs.getString(4));
-                
-                
             } catch (Exception e) {
                 throw new RuntimeException("Error SQL", e);
             }
-            
-//                               
-//            while (rs.next()) {
-//                //rec.setIdReclamo(rs.getInt(1));
-//                rec.setIdReclamo(rs.getInt(1));
-//                rec.setFechaCreacion(rs.getString(2));
-//                rec.setFechaResolucion(rs.getString(3));
-//                rec.setDomicilio(rs.getString(4));
-//                
-//            }
           
         } catch (SQLException e) {
             throw new RuntimeException("Error al obtener reclamos");
@@ -130,6 +112,37 @@ public class ReclamoDAO {
     }
     
     
+    private void fillPreparedStatement(PreparedStatement ps, ReclamoDTO reclamo)throws SQLException {
+         ps.setString(1, reclamo.getFechaCreacion());
+         ps.setString(2, reclamo.getFechaResolucion());
+         ps.setString(3, reclamo.getDomicilio());  
+    }
+    //--------------CONTRIBUYENTE-------------------/
     
-    
+    public List listarReclamoXId(int id){
+        List<ReclamoDTO>lista = new ArrayList<>();
+        try {
+            Connection con = Conexion.getConexion(DRIVER, URL, USER, PASS);
+            
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM reclamos");// where where user=? and password=?
+            ResultSet rs = ps.executeQuery();
+                               
+            while (rs.next()) {
+                ReclamoDTO rec = new ReclamoDTO();
+                rec.setIdReclamo(rs.getInt(1));
+                rec.setFechaCreacion(rs.getString(2));
+                rec.setFechaResolucion(rs.getString(3));
+                rec.setDomicilio(rs.getString(4));
+                if(id==rs.getInt(1)){//VER SI LO COMPARO IDPERSONA
+                lista.add(rec);
+                }
+                
+            }
+          
+        } catch (SQLException e) {
+            throw new RuntimeException("Error al obtener reclamos");
+        }
+        return lista;
+    }
+       
 }

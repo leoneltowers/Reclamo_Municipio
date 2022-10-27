@@ -38,7 +38,7 @@
           <a style = "margin-left:10px; border:none" class="btn btn-outline-light"  href="#" target="frame">CONTRIBUYENTE</a>
         </li>
         <li class="nav-item">
-          <a style = "margin-left:10px; border:none" class="btn btn-outline-light" href="${pageContext.request.contextPath}/reclamos?accion=listar" target="frame">Reclamos</a>
+          <a style = "margin-left:10px; border:none" class="btn btn-outline-light" href="${pageContext.request.contextPath}/generar?accion=listar" target="frame">Reclamos</a>
          
         </li>
       </ul>

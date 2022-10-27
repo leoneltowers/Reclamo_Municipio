@@ -34,9 +34,8 @@
                       </div>
                       <br>
                       <input type="submit" name="accion" Value="Ingresar" class="btn btn-primary btn-block">
-                      <a href="pages/formulario.html">Registrar Usuario</a>
-                      
-                      <a href="${pageContext.request.contextPath}/validar">Contribuyente</a>
+                      <a   href="${pageContext.request.contextPath}/registrarUsuario?accion=agregarPersona">Registrar Usuario</a>
+                    
                       
                       
                       <a href="Administrador.jsp">Administrador</a>

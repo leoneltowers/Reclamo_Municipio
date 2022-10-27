@@ -91,6 +91,7 @@ public class ValidarLoggin extends HttpServlet {
         //processRequest(request, response);
         //      response.setContentType("text/html;charset=UTF-8");
         String accion=request.getParameter("accion");
+        
         if(accion.equalsIgnoreCase("Ingresar")){
             String user=request.getParameter("txtuser");
             String pass=request.getParameter("txtpass");
@@ -98,6 +99,7 @@ public class ValidarLoggin extends HttpServlet {
             
            // pers=persdao.Validar(user, pass);
            us=usdao.Validar(user, pass);
+           
             
             //if(us.getUser()!=null){
             if(us.getUser()!=null){

@@ -16,10 +16,10 @@ public class Modelo {
 public List<ReclamoDTO> getReclamos(){
 List<ReclamoDTO>Lista;
 Lista=new ArrayList<>();
-Lista.add(new ReclamoDTO(1," 01-09-21", "30-04-22",null));
-Lista.add(new ReclamoDTO(2," 01-09-21", "01-07-22",null));
-Lista.add(new ReclamoDTO(3," 21-01-22", "21-09-21",null));
-Lista.add(new ReclamoDTO(4," 01-09-21", "04-02-21",null));
+//Lista.add(new ReclamoDTO(1," 01-09-21", "30-04-22",null));
+//Lista.add(new ReclamoDTO(2," 01-09-21", "01-07-22",null));
+//Lista.add(new ReclamoDTO(3," 21-01-22", "21-09-21",null));
+//Lista.add(new ReclamoDTO(4," 01-09-21", "04-02-21",null));
 
 return Lista;
 }

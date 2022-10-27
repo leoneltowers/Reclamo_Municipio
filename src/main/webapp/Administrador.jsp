@@ -30,7 +30,7 @@
       <!-- navegacion -->
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a  style = "margin-left:10px; border:none" class="btn btn-outline-light" href="#" target="frame">Inicio</a>
+          <a  style = "margin-left:10px; border:none" class="btn btn-outline-light" href="https://www.lamatanza.gov.ar/noticias" target="frame">Inicio</a>
         </li>
         <li class="nav-item">
           <a style = "margin-left:10px; border:none" class="btn btn-outline-light" href="#" target="frame">ADMINISTRADOR</a>
@@ -64,6 +64,7 @@
 
 <div class="m4" style="height: 550px;">
         <iframe name="frame" style="height: 100%; width: 100%"></iframe>
+        <a> <a href="https://www.freecodecamp.org/espanol/news/codigo-de-enlace-html-como-insertar-un-enlace-a-un-sitio-web-con-href/" target="_blank"></a></a>
         
 </div>
 

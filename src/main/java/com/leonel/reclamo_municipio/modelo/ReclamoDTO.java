@@ -8,11 +8,13 @@ public class ReclamoDTO  {//implements Serializable
     private String fechaCreacion;
     private String fechaResolucion;
     private String Domicilio;
+    private int idPersona;
+    
 
     public ReclamoDTO() {
     }
 
-    public ReclamoDTO(int idReclamo, String fechaCreacion, String fechaResolucion, String Domicilio) {
+    public ReclamoDTO(int idReclamo, String fechaCreacion, String fechaResolucion, String Domicilio, int idPersona) {
         this.idReclamo = idReclamo;
         this.fechaCreacion = fechaCreacion;
         this.fechaResolucion = fechaResolucion;
@@ -50,5 +52,15 @@ public class ReclamoDTO  {//implements Serializable
     public void setDomicilio(String Domicilio) {
         this.Domicilio = Domicilio;
     }
+
+    public int getIdPersona() {
+        return idPersona;
+    }
+
+    public void setIdPersona(int idPersona) {
+        this.idPersona = idPersona;
+    }
+    
+    
     
 }

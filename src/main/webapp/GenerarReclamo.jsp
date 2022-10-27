@@ -14,10 +14,10 @@
   <div class="d-flex">
     <div class="card col-sm-4">
      <div class="card-body">
-         <form action="reclamos" method="POST">
+         <form action="generar" method="POST">
           <div class="form-group">
             <label>Fecha Creacion</label>
-            <input type="text" name="txtFecha class="form-control">
+            <input type="text" name="txtFecha" class="form-control">
           </div>
           <div class="form-group">
             <label>Tipo de Reclamo</label>
@@ -50,11 +50,11 @@
         <tbody> 
            <c:forEach var="rec" items="${listarReclamos}" > 
                 <tr>
-                    <td>${rec.getIdReclamo()}</td>
-                    <td>${rec.getFechaCreacion()}</td>
-                    <td>${rec.getFechaResolucion()}</td>
+                    <td>${rec.idReclamo}</td>
+                    <td>${rec.fechaCreacion}</td>
+                    <td>${rec.fechaResolucion}</td>
                     
-                    <td>${rec.getDomicilio()}</td>
+                    <td>${rec.domicilio}</td>
                  </tr>
        
             </c:forEach>    

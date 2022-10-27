@@ -8,6 +8,8 @@ package com.leonel.reclamo_municipio.controlador;
 import com.leonel.reclamo_municipio.modelo.Modelo;
 import com.leonel.reclamo_municipio.modelo.ReclamoDAO;
 import com.leonel.reclamo_municipio.modelo.ReclamoDTO;
+import com.leonel.reclamo_municipio.modelo.UsuarioDAO;
+import com.leonel.reclamo_municipio.modelo.UsuarioDTO;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -24,14 +26,17 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Leonel_Towers
  */
-@WebServlet(name = "GenerarReclamo", urlPatterns = {"/reclamos"})
+@WebServlet(name = "GenerarReclamo", urlPatterns = {"/generar"})
 public class GenerarReclamo extends HttpServlet {
     private Modelo modelo; 
     private final String URI_INGRESAR = "Contribuyente.jsp";
-    private final String URI_RECLAMOS = "GenerarReclamo.jsp";
+    private final String URI_GENERAR = "GenerarReclamo.jsp";
     
     ReclamoDTO rec = new ReclamoDTO();
     ReclamoDAO recdao = new ReclamoDAO();
+    UsuarioDTO us = new UsuarioDTO();
+    UsuarioDAO usdao= new UsuarioDAO();
+    int ide;
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -61,18 +66,34 @@ public class GenerarReclamo extends HttpServlet {
         String accion = request.getParameter("accion");
         //String tipoModelo = request.getParameter("modelo");
         accion = accion == null ? "" : accion;
+        ReclamoDTO recl = null;
         switch (accion) {
             case "ver":
-                request.getRequestDispatcher(URI_RECLAMOS).forward(request, response);
+                request.getRequestDispatcher(URI_GENERAR).forward(request, response);
                 
                 //revisar luego sacar
                 break;
             case "listar":
-                List lista=recdao.listar();
+                
+                
+                //ide=rec.getIdReclamo();
+                int ide = 0;
+                List lista=recdao.listarReclamoXId(ide);
                 request.setAttribute("listarReclamos", lista);
-                request.getRequestDispatcher(URI_RECLAMOS).forward(request, response);
+                request.getRequestDispatcher(URI_GENERAR).forward(request, response);
+                
                 
                 break;    
+                
+//            case "agregar":
+//                String fechaCreacion = request.getParameter("txtFecha");
+//                String domicilio = request.getParameter("txtDomicilio");
+//                rec.setFechaCreacion(fechaCreacion);
+//                rec.setDomicilio(domicilio);
+//                recdao.agregar(rec);
+//                request.getRequestDispatcher("reclamos?accion=listar");
+//                break;
+    
                 
 //            case "agregar":
 //                String fechaCreacion = request.getParameter("txtFecha");
@@ -125,7 +146,7 @@ public class GenerarReclamo extends HttpServlet {
                 rec.setFechaCreacion(fechaCreacion);
                 rec.setDomicilio(domicilio);
                 recdao.agregar(rec);
-                request.getRequestDispatcher("reclamos?accion=listar");
+                request.getRequestDispatcher("generar?accion=listar");
                 break;
      
         }
