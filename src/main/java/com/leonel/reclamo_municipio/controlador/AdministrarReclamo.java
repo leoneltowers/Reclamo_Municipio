@@ -92,13 +92,7 @@ public class AdministrarReclamo extends HttpServlet {
         accion = accion == null ? "" : accion;
         ReclamoDTO recl;
         switch (accion) {
-//            case "edit":
-//                ide=Integer.parseInt(request.getParameter("id"));
-//                ReclamoDTO recl= recdao.listar(ide);
-//                request.setAttribute("reclamo", recl);
-                //request.getRequestDispatcher("administrar?accion=listar").forward(request, response);
-                
-//                break;
+
             case "update":
                 ide=Integer.parseInt(request.getParameter("idReclamo"));
                 recl = recdao.getReclamo(ide);
@@ -114,7 +108,7 @@ public class AdministrarReclamo extends HttpServlet {
                 
                 break;
         }        
-        //doGet(request, response);
+        doGet(request, response);
     }
 
     

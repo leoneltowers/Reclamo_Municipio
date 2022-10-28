@@ -22,9 +22,7 @@ public class PersonaDAO {
            Connection con = Conexion.getConexion(DRIVER, URL, USER, PASS);
            
             PreparedStatement ps = con.prepareStatement(sql);
-            fillPreparedStatement(ps, pers);
-            
-            
+            fillPreparedStatement(ps, pers); 
             
 //            ps.setString(1, pers.getDni());
 //            ps.setString(2, pers.getNombre());

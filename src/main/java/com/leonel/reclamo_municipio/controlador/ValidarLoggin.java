@@ -27,7 +27,7 @@ import javax.servlet.http.HttpServletResponse;
 public class ValidarLoggin extends HttpServlet {
 
     private UsuarioDAO usdao;
-    UsuarioDTO us = new UsuarioDTO();
+    //UsuarioDTO us = new UsuarioDTO();
     
     public void init()throws ServletException{
         this.usdao= new UsuarioDAO();
@@ -69,12 +69,7 @@ public class ValidarLoggin extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       
-    //request.setAttribute("listaReclamos", modelo.getReclamos());
-//    request.getRequestDispatcher(URI_CONT).forward(request, response);
-    
-    
-    
+  
 
     }
 
@@ -89,6 +84,7 @@ public class ValidarLoggin extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        UsuarioDTO us;
         
         String accion=request.getParameter("accion");
         

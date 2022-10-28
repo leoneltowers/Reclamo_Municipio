@@ -18,7 +18,7 @@
       <div class="container mt-4 col-lg-4">
           <div class="card col-sm-10 bg-secondary">
               <div class="card-body">
-                  <form class="form-sing" action="validar" method="post">
+                  <form class="form-sing" action="${pageContext.request.contextPath}/parcial2" method="post">
                       <div class="form-group text-center">
                           <h3>Login</h3>
                           <img src="img/logo-left.png" alt="logo_municipalidad" width="300"/>
@@ -33,12 +33,11 @@
                           <input type="password" name="txtpass" class="form-control">
                       </div>
                       <br>
-                      <input type="submit" name="accion" Value="Ingresar" class="btn btn-primary btn-block">
+                      <input type="submit" name="accion" Value="VER RECLAMOS" class="btn btn-primary btn-block">
                       <a   href="${pageContext.request.contextPath}/registrarUsuario?accion=editPersona">Registrar Usuario</a>
                     
                       
-                      
-                      <a href="Administrador.jsp">Administrador</a>
+                     
                   </form>
                   
               </div>

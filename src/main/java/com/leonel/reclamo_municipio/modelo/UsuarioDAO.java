@@ -24,7 +24,7 @@ public class UsuarioDAO {
     private static final String PASS = "1809";
     
     public UsuarioDTO Validar(String user, String password){
-        UsuarioDTO us = new UsuarioDTO();
+        UsuarioDTO us = null;
         try {
             Connection con = Conexion.getConexion(DRIVER, URL, USER, PASS);
             
@@ -34,16 +34,11 @@ public class UsuarioDAO {
             ResultSet rs = ps.executeQuery();
                                
             while (rs.next()) {
-//                           
-//                us.setId_user(rs.getInt(1));
-//                us.setUser(rs.getString(2));
-//                us.setPassword(rs.getString(3));                
-//                us.setTipoUsuario(rs.getString(4));
                   us.setId_user(rs.getInt("id_user"));
                   us.setUser(rs.getString("user"));
                   us.setPassword(rs.getString("password"));
                   us.setTipoUsuario(rs.getString("tipoUsuario"));
-//         
+        
                            
             }
           
@@ -51,9 +46,9 @@ public class UsuarioDAO {
             throw new RuntimeException("Error al obtener ACCESO USER-PASSWORD");
         }
     
-      
         return us;
     }
+    
     
   
     
