@@ -21,10 +21,16 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "AdministrarReclamo", urlPatterns = {"/administrar"})
 public class AdministrarReclamo extends HttpServlet {
-    private final String URI_ADMIN_REC = "EditarReclamo.jsp";
-    ReclamoDTO rec = new ReclamoDTO();
-    ReclamoDAO recdao = new ReclamoDAO();
+    private final String URI_ADMIN_REC = "WEB-INF/pages/admin/EditarReclamo.jsp";
+    private ReclamoDAO recdao;
+    //ReclamoDTO rec = new ReclamoDTO();
+   
     int ide;
+    
+    
+    public void init()throws ServletException{
+        this.recdao= new ReclamoDAO();
+    }
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -71,9 +77,7 @@ public class AdministrarReclamo extends HttpServlet {
             case "delete":
                 ide=Integer.parseInt(request.getParameter("idReclamo"));
                 recdao.eliminar(ide);
-                request.getRequestDispatcher("administrar?accion=listar").forward(request, response);
-                
-                               
+                request.getRequestDispatcher("administrar?accion=listar").forward(request, response);         
                 break;    
         }
         
@@ -97,24 +101,10 @@ public class AdministrarReclamo extends HttpServlet {
 //                break;
             case "update":
                 ide=Integer.parseInt(request.getParameter("idReclamo"));
-                rec = recdao.getReclamo(ide);
-                cargarReclamosegunParams(rec, request);
-                recdao.actualizar(rec);        
-//                String fechaCreacion = request.getParameter("txtFechaCreacion");
-//                String fecharesolucion = request.getParameter("txtFechaResolucion");
-//                //String categoria = request.getParameter("txtCategoria");
-//                String domicilio = request.getParameter("txtDomicilio");
-//                rec.setFechaCreacion(fechaCreacion);
-//                rec.setFechaResolucion(fecharesolucion);
-//                //rec.setFechaCreacion(categoria);//cambiar
-//                rec.setDomicilio(domicilio);
-//                //rec.setIdReclamo(ide);
-//                //recdao.agregar(rec); 
-                
-                
-                //request.getRequestDispatcher("administrar?accion=listar").forward(request, response); 
-                
-                               
+                recl = recdao.getReclamo(ide);
+                cargarReclamosegunParams(recl, request);
+                recdao.actualizar(recl);      
+                request.getRequestDispatcher("administrar?accion=listar").forward(request, response);
                 break;
                 
             case "add":
@@ -124,7 +114,7 @@ public class AdministrarReclamo extends HttpServlet {
                 
                 break;
         }        
-        doGet(request, response);
+        //doGet(request, response);
     }
 
     
@@ -133,9 +123,8 @@ public class AdministrarReclamo extends HttpServlet {
         
         rec.setFechaCreacion(request.getParameter("txtFechaCreacion"));
         rec.setFechaResolucion(request.getParameter("txtFechaResolucion"));
-        //rec.setFechaCreacion(categoria);//cambiar
         rec.setDomicilio(request.getParameter("txtDomicilio"));
-        //rec.setIdReclamo(ide);
+        
          
     }
     

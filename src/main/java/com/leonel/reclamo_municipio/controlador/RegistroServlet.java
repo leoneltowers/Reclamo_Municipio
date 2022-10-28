@@ -23,8 +23,9 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "RegistroServlet", urlPatterns = {"/registrarUsuario"})
 public class RegistroServlet extends HttpServlet {
 
-    private final String URI_PERS = "RegistrarPersona.jsp";
+    private final String URI_PERS = "WEB-INF/pages/loggin/RegistrarPersona.jsp";
     private PersonaDAO persona;
+    PersonaDTO pers=new PersonaDTO();
     
     public void init() throws ServletException{
     this.persona = new PersonaDAO();
@@ -43,9 +44,6 @@ public class RegistroServlet extends HttpServlet {
         switch (accion) {
             case "editPersona":
                 
-//                PersonaDTO persona = new PersonaDTO();
-//                cargarPersonaSegunParams(persona, request);
-//                persdao.agregar(persona);
                 request.getRequestDispatcher(URI_PERS).forward(request, response);
                 break;
                 
@@ -53,7 +51,7 @@ public class RegistroServlet extends HttpServlet {
                 request.getRequestDispatcher(URI_PERS).forward(request, response);
                 break;    
         }
-      doGet(request, response);
+     
     }
 
     
@@ -71,26 +69,11 @@ public class RegistroServlet extends HttpServlet {
                 
                 pers = new PersonaDTO();
                 cargarPersonaSegunParams(pers, request);
-                persona.agregarPersona(pers);
-                //request.getRequestDispatcher(URI_PERS).forward(request, response);
-                
-//                String dni= request.getParameter("dni");
-//                String nom=request.getParameter("nombre");
-//                String ape=request.getParameter("apellido");
-//                String email=request.getParameter("email");
-//                String tel= request.getParameter("telefono");
-//        
-//                pers.setDni(dni);
-//                pers.setNombre(nom);
-//                pers.setApellido(ape);
-//                pers.setMail(email);
-//                pers.setTelefonoMovil(email);
-                
-                
+                persona.agregarPersona(pers);            
                 break;
         }
         
-       
+        doGet(request, response);
     }
 
     private void cargarPersonaSegunParams(PersonaDTO per, HttpServletRequest request) {

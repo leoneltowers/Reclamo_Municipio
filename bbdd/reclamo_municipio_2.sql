@@ -1,0 +1,1 @@
+SELECT * FROM reclamo_municipio.reclamos;

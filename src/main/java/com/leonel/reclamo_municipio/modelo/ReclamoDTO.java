@@ -9,6 +9,7 @@ public class ReclamoDTO  {//implements Serializable
     private String fechaResolucion;
     private String Domicilio;
     private int idPersona;
+    private int id_persona_user;
     
 
     public ReclamoDTO() {
@@ -19,7 +20,18 @@ public class ReclamoDTO  {//implements Serializable
         this.fechaCreacion = fechaCreacion;
         this.fechaResolucion = fechaResolucion;
         this.Domicilio = Domicilio;
+        this.id_persona_user = id_persona_user;
+        
     }
+
+    public int getId_persona_user() {
+        return id_persona_user;
+    }
+
+    public void setId_persona_user(int id_persona_user) {
+        this.id_persona_user = id_persona_user;
+    }
+    
 
     public int getIdReclamo() {
         return idReclamo;

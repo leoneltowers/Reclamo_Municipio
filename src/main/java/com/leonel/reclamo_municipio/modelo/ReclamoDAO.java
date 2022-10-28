@@ -133,7 +133,8 @@ public class ReclamoDAO {
                 rec.setFechaCreacion(rs.getString(2));
                 rec.setFechaResolucion(rs.getString(3));
                 rec.setDomicilio(rs.getString(4));
-                if(id==rs.getInt(1)){//VER SI LO COMPARO IDPERSONA
+                rec.setId_persona_user(rs.getInt(5));
+                if(id==rs.getInt(5)){//VER SI LO COMPARO IDPERSONA
                 lista.add(rec);
                 }
                 

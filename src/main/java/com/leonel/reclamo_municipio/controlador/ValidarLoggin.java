@@ -25,14 +25,17 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "Login", urlPatterns = {"/validar"})
 public class ValidarLoggin extends HttpServlet {
-//    PersonaDAO persdao = new PersonaDAO();
-//    PersonaDTO pers = new PersonaDTO();
-    UsuarioDAO usdao= new UsuarioDAO();
+
+    private UsuarioDAO usdao;
     UsuarioDTO us = new UsuarioDTO();
     
+    public void init()throws ServletException{
+        this.usdao= new UsuarioDAO();
+    }
+    
     private Modelo modelo; 
-    private final String URI_CONT= "Contribuyente.jsp";
-    private final String URI_ADMIN = "Administrador.jsp";
+    private final String URI_CONT= "WEB-INF/pages/contribuyente/Contribuyente.jsp";
+    private final String URI_ADMIN = "WEB-INF/pages/admin/Administrador.jsp";
     private final String CONT = "contribuyente";
     private final String ADMIM = "administrador";
     
@@ -52,9 +55,7 @@ public class ValidarLoggin extends HttpServlet {
         
     }
     
-    public void init()throws ServletException{
-        this.modelo= new Modelo();
-    }
+    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -88,20 +89,16 @@ public class ValidarLoggin extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //processRequest(request, response);
-        //      response.setContentType("text/html;charset=UTF-8");
+        
         String accion=request.getParameter("accion");
         
         if(accion.equalsIgnoreCase("Ingresar")){
+            String id=request.getParameter("id_user");
             String user=request.getParameter("txtuser");
             String pass=request.getParameter("txtpass");
-            
-            
-           // pers=persdao.Validar(user, pass);
+          
            us=usdao.Validar(user, pass);
            
-            
-            //if(us.getUser()!=null){
             if(us.getUser()!=null){
                 
                 request.setAttribute("usuario", us);
@@ -114,8 +111,7 @@ public class ValidarLoggin extends HttpServlet {
             }else { 
                 request.getRequestDispatcher("index.jsp").forward(request, response);
                         }
-            
-        //en caso de no validar se devuelve a index          
+                     
         }else{
             request.getRequestDispatcher("index.jsp").forward(request, response);
         }
@@ -131,19 +127,3 @@ public class ValidarLoggin extends HttpServlet {
 
         
 
-
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-//    @Override
-//    public String getServletInfo() {
-//        return "Short description";
-//    }// </editor-fold>
-    
-    
-    
-
-//}

@@ -28,15 +28,18 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "GenerarReclamo", urlPatterns = {"/generar"})
 public class GenerarReclamo extends HttpServlet {
-    private Modelo modelo; 
-    private final String URI_INGRESAR = "Contribuyente.jsp";
-    private final String URI_GENERAR = "GenerarReclamo.jsp";
-    
+    private ReclamoDAO recdao; 
+    private final String URI_INGRESAR = "WEB-INF/pages/contribuyente/Contribuyente.jsp";
+    private final String URI_GENERAR = "WEB-INF/pages/contribuyente/GenerarReclamo.jsp";
     ReclamoDTO rec = new ReclamoDTO();
-    ReclamoDAO recdao = new ReclamoDAO();
     UsuarioDTO us = new UsuarioDTO();
-    UsuarioDAO usdao= new UsuarioDAO();
+   
     int ide;
+    
+    
+    public void init()throws ServletException{
+        this.recdao= new ReclamoDAO();
+    }
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -44,9 +47,7 @@ public class GenerarReclamo extends HttpServlet {
         
     }
     
-    public void init()throws ServletException{
-        this.modelo= new Modelo();
-    }
+    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -78,6 +79,7 @@ public class GenerarReclamo extends HttpServlet {
                 
                 //ide=rec.getIdReclamo();
                 int ide = 0;
+                ide=Integer.parseInt(request.getParameter("id_user"));
                 List lista=recdao.listarReclamoXId(ide);
                 request.setAttribute("listarReclamos", lista);
                 request.getRequestDispatcher(URI_GENERAR).forward(request, response);

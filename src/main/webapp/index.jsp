@@ -8,11 +8,11 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-<jsp:include page="pages/partesIdem/inicioHTML.jsp"/>
+<jsp:include page="WEB-INF/pages/partesIdem/inicioHTML.jsp"/>
 
-<jsp:include page="pages/partesIdem/inicioHead.jsp"/>
+<jsp:include page="WEB-INF/pages/partesIdem/inicioHead.jsp"/>
 <title> Municipalidad de La Matanza</title>
-<jsp:include page="pages/partesIdem/finHead.jsp"/>
+<jsp:include page="WEB-INF/pages/partesIdem/finHead.jsp"/>
 
  
       <div class="container mt-4 col-lg-4">
@@ -48,6 +48,6 @@
       </div>
 
     
-<jsp:include page="pages/partesIdem/footer.jsp"/>
+<jsp:include page="WEB-INF/pages/partesIdem/footer.jsp"/>
 
-<jsp:include page="pages/partesIdem/finHTML.jsp"/>    
+<jsp:include page="WEB-INF/pages/partesIdem/finHTML.jsp"/>    
