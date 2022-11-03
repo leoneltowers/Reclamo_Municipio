@@ -24,46 +24,22 @@
       
                       <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Registrarse</p>
       
-                      <form class="mx-1 mx-md-4" action="${pageContext.request.contextPath}/registrarUsuario?accion=agregarPersona" method="post">
+                      <form class="mx-1 mx-md-4" action="${pageContext.request.contextPath}/registrarUsuario?accion=crearUsuario" method="post">
       
-                        <div class="d-flex flex-row align-items-center mb-4">
-                          <i class="fas fa-user fa-lg me-3 fa-fw"></i>
-                          
-                          <div class="form-outline flex-fill mb-0">
-                            <input type="text" id="form3Example1c" name ="dni" class="form-control" />
-                            <label class="form-label" for="form3Example1c">Tu nombre</label>
-                          </div>
-                        </div>
-                          
-                        <div class="d-flex flex-row align-items-center mb-4">
-                          <i class="fas fa-user fa-lg me-3 fa-fw"></i>
-                          
-                          <div class="form-outline flex-fill mb-0">
-                            <input type="text" id="form3Example1c" name ="nom" class="form-control" />
-                            <label class="form-label" for="form3Example1c">Tu nombre</label>
-                          </div>
-                        </div>
-
-                        <div class="d-flex flex-row align-items-center mb-4">
-                            <i class="fas fa-user fa-lg me-3 fa-fw"></i>
-                            <div class="form-outline flex-fill mb-0">
-                              <input type="text" id="form3Example1c" name ="ape" class="form-control" />
-                              <label class="form-label" for="form3Example1c">Tu apellido</label>
-                            </div>
-                          </div>
+                        
       
                         <div class="d-flex flex-row align-items-center mb-4">
                           <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
                           <div class="form-outline flex-fill mb-0">
-                            <input type="email" id="form3Example3c" name="email" class="form-control" />
-                            <label class="form-label" for="form3Example3c">Tu Email</label>
+                            <input type="text" id="form3Example3c" name="usuario" class="form-control" />
+                            <label class="form-label" for="form3Example3c">Nombre de usuario</label>
                           </div>
                         </div>
       
                         <div class="d-flex flex-row align-items-center mb-4">
                           <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
                           <div class="form-outline flex-fill mb-0">
-                            <input type="password" id="form3Example4c" name="tel" class="form-control" />
+                            <input type="password" id="form3Example4c" name="password" class="form-control" />
                             <label class="form-label" for="form3Example4c">Contraseña</label>
                           </div>
                         </div>
@@ -86,6 +62,7 @@
                         <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
                           <button  type="submit"  class="btn btn-primary btn-lg">Registrarse</button>
                         </div>
+                         
       
                       </form>
       

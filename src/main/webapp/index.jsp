@@ -34,7 +34,7 @@
                       </div>
                       <br>
                       <input type="submit" name="accion" Value="VER RECLAMOS" class="btn btn-primary btn-block">
-                      <a   href="${pageContext.request.contextPath}/registrarUsuario?accion=editPersona">Registrar Usuario</a>
+                      <a   href="${pageContext.request.contextPath}/registrarUsuario?accion=register">Registrar Usuario</a>
                     
                       
                      

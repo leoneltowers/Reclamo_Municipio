@@ -14,7 +14,7 @@
   <div class="d-flex">
     <div class="card col-sm-4">
      <div class="card-body">
-         <form action="${pageContext.request.contextPath}/generar?accion=agregar" method="POST" class="was-validated">
+         <form action="${pageContext.request.contextPath}/generar?accion=agregarReclamo" method="POST" class="was-validated">
           <div class="form-group">
             <label>FECHA</label>
             <input type="text" name="txtFecha" class="form-control">

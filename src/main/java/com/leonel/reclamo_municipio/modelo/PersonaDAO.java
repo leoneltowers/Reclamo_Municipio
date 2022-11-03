@@ -17,7 +17,7 @@ public class PersonaDAO {
     
     public int agregarPersona (PersonaDTO pers){
         int regtsAgr = 0;
-        String sql = "INSERT INTO personas (dni,nombre,apellido,mail,telefonoMovil) VALUES (?,?,?,?,?)";
+        String sql = "INSERT INTO personas (dni,nombre,apellido,mail,telefonoMovil) VALUES (?,?,?,?,?);";
         try{
            Connection con = Conexion.getConexion(DRIVER, URL, USER, PASS);
            

@@ -22,6 +22,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "AdministrarReclamo", urlPatterns = {"/administrar"})
 public class AdministrarReclamo extends HttpServlet {
     private final String URI_ADMIN_REC = "WEB-INF/pages/admin/EditarReclamo.jsp";
+    private final String URI_NO_RES = "WEB-INF/pages/admin/ResolverReclamo.jsp";
     private ReclamoDAO recdao;
     //ReclamoDTO rec = new ReclamoDTO();
    
@@ -78,6 +79,9 @@ public class AdministrarReclamo extends HttpServlet {
                 ide=Integer.parseInt(request.getParameter("idReclamo"));
                 recdao.eliminar(ide);
                 request.getRequestDispatcher("administrar?accion=listar").forward(request, response);         
+                break;
+            case "reclamosNoRes":
+                request.getRequestDispatcher(URI_NO_RES).forward(request, response); 
                 break;    
         }
         

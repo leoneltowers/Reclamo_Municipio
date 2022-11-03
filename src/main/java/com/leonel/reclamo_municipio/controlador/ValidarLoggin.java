@@ -6,13 +6,14 @@ package com.leonel.reclamo_municipio.controlador;
 
 
 import com.leonel.reclamo_municipio.modelo.Modelo;
-import com.leonel.reclamo_municipio.modelo.UsuarioDAO;
+import com.leonel.reclamo_municipio.modelo.Modelo_Loggin;
 import com.leonel.reclamo_municipio.modelo.UsuarioDTO;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
 import java.util.Properties;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -26,11 +27,11 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "Login", urlPatterns = {"/validar"})
 public class ValidarLoggin extends HttpServlet {
 
-    private UsuarioDAO usdao;
+    private Modelo_Loggin usdao;
     //UsuarioDTO us = new UsuarioDTO();
     
     public void init()throws ServletException{
-        this.usdao= new UsuarioDAO();
+        this.usdao= new Modelo_Loggin();
     }
     
     private Modelo modelo; 
@@ -94,10 +95,15 @@ public class ValidarLoggin extends HttpServlet {
             String pass=request.getParameter("txtpass");
           
            us=usdao.Validar(user, pass);
+           RequestDispatcher vista = null;
+           
            
             if(us.getUser()!=null){
                 
                 request.setAttribute("usuario", us);
+                
+               // vista = request.getRequestDispatcher(us.getVista());
+              
             
                 if( us.getTipoUsuario().equalsIgnoreCase(CONT)){
                 request.getRequestDispatcher(URI_CONT).forward(request, response);
@@ -113,13 +119,9 @@ public class ValidarLoggin extends HttpServlet {
         }
    
     
-    }
-        
+    }//cerraba el if
+      
         
  }
-    
-    
-    
 
-        
 

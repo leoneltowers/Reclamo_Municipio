@@ -39,21 +39,22 @@ public class ReclamoDAO {
     }
     
     public int agregar (ReclamoDTO rec){
-        String sql = "INSERTAR INTO reclamos VALUES(null,?,null,?))";//(fechaCreacion, fechaResolucion, domicilio) 
+        int regtsAgr = 0;
+        String sql = "INSERT INTO reclamos (fechaCreacion,domicilio) VALUES(?,?);";//(fechaCreacion, fechaResolucion, domicilio) 
         try{
            Connection con = Conexion.getConexion(DRIVER, URL, USER, PASS);
             
             PreparedStatement ps = con.prepareStatement(sql);// where where user=? and password=?
-            ResultSet rs = ps.executeQuery();
-            ps.setString(1, rec.getFechaCreacion());
-            ps.setString(1, rec.getFechaResolucion());
-            ps.setString(1, rec.getDomicilio());
             
-          
+            ps.setString(1, rec.getFechaCreacion());
+            //ps.setString(1, rec.getFechaResolucion());
+            ps.setString(2, rec.getDomicilio());
+            
+          ps.executeUpdate();
         } catch (SQLException e) {
-            throw new RuntimeException("Error al obtener/agregar reclamos");
+            throw new RuntimeException("Error al agregar reclamos");
         }
-        return resp;
+        return regtsAgr;
     }
     
     public int actualizar (ReclamoDTO reclamo){

@@ -4,11 +4,18 @@
  */
 package com.leonel.reclamo_municipio.modelo;
 
+import com.leonel.reclamo_municipio.config.Conexion;
+import java.io.Serializable;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 /**
  *
  * @author Leonel_Towers
  */
-public class UsuarioDTO {
+public abstract  class UsuarioDTO implements Serializable{
     private int id_user;
     private String user;
     private String password;
@@ -56,5 +63,6 @@ public class UsuarioDTO {
         this.tipoUsuario = tipoUsuario;
     }
     
-   
+    public abstract String getVista();
+     
 }

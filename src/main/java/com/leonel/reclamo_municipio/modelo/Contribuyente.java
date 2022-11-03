@@ -10,14 +10,19 @@ package com.leonel.reclamo_municipio.modelo;
  */
 public class Contribuyente extends UsuarioDTO {
 
+    public Contribuyente() {
+    }
+
+    
+
     public Contribuyente(int id_user, String user, String password, String tipoUsuario) {
         super(id_user, user, password, tipoUsuario);
     }
 
-   
-    public void iniciarSession(String tipousuario) {
-        
-        
+    
+    @Override
+    public String getVista() {
+       return "WEB-INF/pages/contribuyente/Contribuyente.jsp";
     }
     
     

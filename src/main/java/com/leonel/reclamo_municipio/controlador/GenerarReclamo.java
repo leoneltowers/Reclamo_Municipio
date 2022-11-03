@@ -8,7 +8,7 @@ package com.leonel.reclamo_municipio.controlador;
 import com.leonel.reclamo_municipio.modelo.Modelo;
 import com.leonel.reclamo_municipio.modelo.ReclamoDAO;
 import com.leonel.reclamo_municipio.modelo.ReclamoDTO;
-import com.leonel.reclamo_municipio.modelo.UsuarioDAO;
+import com.leonel.reclamo_municipio.modelo.Modelo_Loggin;
 import com.leonel.reclamo_municipio.modelo.UsuarioDTO;
 
 import java.io.IOException;
@@ -32,7 +32,8 @@ public class GenerarReclamo extends HttpServlet {
     private final String URI_INGRESAR = "WEB-INF/pages/contribuyente/Contribuyente.jsp";
     private final String URI_GENERAR = "WEB-INF/pages/contribuyente/GenerarReclamo.jsp";
     ReclamoDTO rec = new ReclamoDTO();
-    UsuarioDTO us = new UsuarioDTO();
+    //UsuarioDTO us = new UsuarioDTO();//probando validar2
+    
    
     int ide;
     
@@ -75,28 +76,16 @@ public class GenerarReclamo extends HttpServlet {
                 //revisar luego sacar
                 break;
             case "listar":
-                
-                
                 //ide=rec.getIdReclamo();
                 int ide = 0;
                 ide=Integer.parseInt(request.getParameter("id_user"));
                 List lista=recdao.listarReclamoXId(ide);
                 request.setAttribute("listarReclamos", lista);
                 request.getRequestDispatcher(URI_GENERAR).forward(request, response);
-                
-                
-                break;    
-                
-//            case "agregar":
-//                String fechaCreacion = request.getParameter("txtFecha");
-//                String domicilio = request.getParameter("txtDomicilio");
-//                rec.setFechaCreacion(fechaCreacion);
-//                rec.setDomicilio(domicilio);
-//                recdao.agregar(rec);
-//                request.getRequestDispatcher("reclamos?accion=listar");
-//                break;
-    
-                
+          
+                break;
+            default:
+                request.getRequestDispatcher(URI_GENERAR).forward(request, response); 
 
      
         }
@@ -115,12 +104,12 @@ public class GenerarReclamo extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String accion = request.getParameter("action");
+        String accion = request.getParameter("accion");
         //String tipoModelo = request.getParameter("modelo");
         accion = accion == null ? "" : accion;
         switch (accion) {
 
-            case "agregar":
+            case "agregarReclamo":
                 String fechaCreacion = request.getParameter("txtFecha");
                 String domicilio = request.getParameter("txtDomicilio");
                 rec.setFechaCreacion(fechaCreacion);
