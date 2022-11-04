@@ -5,6 +5,7 @@
 package com.leonel.reclamo_municipio.controlador;
 
 
+import com.leonel.reclamo_municipio.modelo.CategoriaDTO;
 import com.leonel.reclamo_municipio.modelo.Modelo;
 import com.leonel.reclamo_municipio.modelo.ReclamoDAO;
 import com.leonel.reclamo_municipio.modelo.ReclamoDTO;
@@ -31,11 +32,11 @@ public class GenerarReclamo extends HttpServlet {
     private ReclamoDAO recdao; 
     private final String URI_INGRESAR = "WEB-INF/pages/contribuyente/Contribuyente.jsp";
     private final String URI_GENERAR = "WEB-INF/pages/contribuyente/GenerarReclamo.jsp";
-    ReclamoDTO rec = new ReclamoDTO();
+   // ReclamoDTO rec = new ReclamoDTO();
     //UsuarioDTO us = new UsuarioDTO();//probando validar2
     
    
-    int ide;
+  
     
     
     public void init()throws ServletException{
@@ -62,18 +63,13 @@ public class GenerarReclamo extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       
-        //request.setAttribute("listaReclamos", modelo.getReclamos());
-        //request.getRequestDispatcher(URI_INGRESAR).forward(request, response);
         String accion = request.getParameter("accion");
-        //String tipoModelo = request.getParameter("modelo");
         accion = accion == null ? "" : accion;
         ReclamoDTO recl = null;
         switch (accion) {
             case "ver":
                 request.getRequestDispatcher(URI_GENERAR).forward(request, response);
-                
-                //revisar luego sacar
+              
                 break;
             case "listar":
                 //ide=rec.getIdReclamo();
@@ -106,17 +102,35 @@ public class GenerarReclamo extends HttpServlet {
             throws ServletException, IOException {
         String accion = request.getParameter("accion");
         //String tipoModelo = request.getParameter("modelo");
+        ReclamoDTO rec;
+        CategoriaDTO cat;
         accion = accion == null ? "" : accion;
         switch (accion) {
 
             case "agregarReclamo":
                 String fechaCreacion = request.getParameter("txtFecha");
                 String domicilio = request.getParameter("txtDomicilio");
+                String categ = request.getParameter("txtCategoria");
+                String des = request.getParameter("txtDescripcion");
+//                int ide=0;
+//                ide= Integer.parseInt(request.getParameter("id_user"));//ES null no llega para agregar en idper
+//                
+                
+                rec = new ReclamoDTO();
                 rec.setFechaCreacion(fechaCreacion);
                 rec.setDomicilio(domicilio);
+                rec.setCategoria(categ);
+                rec.setDescripcion(des);
+                rec.setId_Persona(1);//pendiente
+                
                 recdao.agregar(rec);
+                
+                
                 request.getRequestDispatcher("generar?accion=listar");
                 break;
+
+
+
      
         }
     }

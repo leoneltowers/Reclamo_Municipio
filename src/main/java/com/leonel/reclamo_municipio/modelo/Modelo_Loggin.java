@@ -40,7 +40,7 @@ public class Modelo_Loggin {
             ps.setString(2, password);
             ResultSet rs = ps.executeQuery(); 
       
-                if (rs.next()) {
+            if (rs.next()) {
                 /** @TODO: Agregar Factory **/
                 switch (rs.getString("tipoUsuario")) {
                     case "administrador":
@@ -53,7 +53,7 @@ public class Modelo_Loggin {
                        break;
                 }
              
-      }
+            }
         } catch (SQLException e) {
             throw new RuntimeException("Error al obtener ACCESO USER-PASSWORD");
         }

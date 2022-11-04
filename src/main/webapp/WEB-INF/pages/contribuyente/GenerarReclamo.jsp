@@ -14,7 +14,7 @@
   <div class="d-flex">
     <div class="card col-sm-4">
      <div class="card-body">
-         <form action="${pageContext.request.contextPath}/generar?accion=agregarReclamo" method="POST" class="was-validated">
+         <form action="${pageContext.request.contextPath}/generar?accion=agregarReclamo&id_user=${usuario.getId_user}" method="POST" class="was-validated">
           <div class="form-group">
             <label>FECHA</label>
             <input type="text" name="txtFecha" class="form-control">
@@ -23,7 +23,7 @@
              
            <div class="form-group">
             <label>CATEGORIA</label>
-            <input type="text" name="txtCat" class="form-control"><!--pendiente  -->
+            <input type="text" name="txtCategoria" class="form-control"><!--pendiente  -->
               
           </div>  
              
@@ -31,6 +31,12 @@
             <label>DOMICILIO</label>
             <input type="text" name="txtDomicilio" class="form-control">
           </div>
+         
+          <div class="form-group">
+            <label>DESCRIPCION</label>
+            <input type="text" name="txtDescripcion" class="form-control">
+          </div>
+          
           <label></label>
           <input type="submit" name="accion" value="Agregar" class="btn btn-success">
         </form>
@@ -47,6 +53,7 @@
             <th>FECHA RESOLUCION</th>
             <th>CATEGORIA</th>
             <th>DOMICILIO</th>
+            <th>DESCRIPCION</th>
           </tr>
         </thead>
         
@@ -56,8 +63,9 @@
                     <td>${rec.idReclamo}</td>
                     <td>${rec.fechaCreacion}</td>
                     <td>${rec.fechaResolucion}</td>
-                    <td>Arbolado</td>
+                    <td>${rec.categoria}</td>
                     <td>${rec.domicilio}</td>
+                    <td>${rec.descripcion}</td>
                  </tr>
        
             </c:forEach>    

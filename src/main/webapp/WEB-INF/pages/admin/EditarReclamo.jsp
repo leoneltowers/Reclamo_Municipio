@@ -31,6 +31,16 @@
             <label>Domicilio</label>
             <input type="text" value="${editarReclamo.domicilio}" name="txtDomicilio" class="form-control">
           </div>
+          
+          <div class="form-group">
+            <label>Categoria</label>
+            <input type="text" value="${editarReclamo.categoria}" name="txtcategoria" class="form-control">
+          </div>
+          <div class="form-group">
+            <label>Descripcion</label>
+            <input type="text" value="${editarReclamo.descripcion}" name="txtcategoria" class="form-control">
+          </div>
+          
           <label></label>
           <h6>Estas seguro que deseas modificar?</h6>
           <button type="submit"   class="btn btn-success">ACTUALIZAR</button>
@@ -45,8 +55,12 @@
             <th>ID RECLAMO</th>
             <th>FECHA CREACION</th>
             <th>FECHA RESOLUCION</th>
+            
             <th>CATEGORIA</th>
             <th>DOMICILIO</th>
+            
+            <th>DESCRIPCION</th>
+            
             <th>ACCIONES</th>
           </tr>
         </thead>
@@ -57,8 +71,10 @@
                     <td>${rec.idReclamo}</td>
                     <td>${rec.fechaCreacion}</td>
                     <td>${rec.fechaResolucion}</td>
-                    <td>Arbolado</td>
+                    
+                    <td>${rec.categoria}</td>
                     <td>${rec.domicilio}</td>
+                    <td>${rec.descripcion}</td>
                 <td>
                     <a  class="btn btn-warning" href="${pageContext.request.contextPath}/administrar?accion=edit&idReclamo=${rec.idReclamo}">Editar</a>
                     <a class="btn btn-danger"    href="${pageContext.request.contextPath}/administrar?accion=delete&idReclamo=${rec.idReclamo}">Eliminar</a>

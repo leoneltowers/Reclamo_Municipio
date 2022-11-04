@@ -29,18 +29,24 @@ public class ReclamoDAO {
                 rec.setFechaCreacion(rs.getString(2));
                 rec.setFechaResolucion(rs.getString(3));
                 rec.setDomicilio(rs.getString(4));
+                
+                
+                rec.setCategoria(rs.getString(5));
+                rec.setDescripcion(rs.getString(6));
+                rec.setId_Persona(rs.getInt(7));
+                
                 lista.add(rec);
             }
           
         } catch (SQLException e) {
-            throw new RuntimeException("Error al obtener reclamos");
+            throw new RuntimeException("Error al listar reclamos");
         }
         return lista;
     }
     
     public int agregar (ReclamoDTO rec){
         int regtsAgr = 0;
-        String sql = "INSERT INTO reclamos (fechaCreacion,domicilio) VALUES(?,?);";//(fechaCreacion, fechaResolucion, domicilio) 
+        String sql = "INSERT INTO reclamos (fechaCreacion,domicilio,categoria,descripcion,id_persona) VALUES(?,?,?,?,?);";//(fechaCreacion, fechaResolucion, domicilio) 
         try{
            Connection con = Conexion.getConexion(DRIVER, URL, USER, PASS);
             
@@ -49,6 +55,9 @@ public class ReclamoDAO {
             ps.setString(1, rec.getFechaCreacion());
             //ps.setString(1, rec.getFechaResolucion());
             ps.setString(2, rec.getDomicilio());
+            ps.setString(3, rec.getCategoria());
+            ps.setString(4, rec.getDescripcion());
+            ps.setInt(5, rec.getId_Persona());
             
           ps.executeUpdate();
         } catch (SQLException e) {
@@ -59,9 +68,9 @@ public class ReclamoDAO {
     
     public int actualizar (ReclamoDTO reclamo){
         int reclModificados=0;
-        //String sql = "UPDATE reclamos SET fechaCreacion=?, fechaResolucion=?,domicilio=? WHERE idReclamo=?";//(fechaCreacion, fechaResolucion, domicilio) 
+        
         try( Connection con = Conexion.getConexion(DRIVER, URL, USER, PASS); PreparedStatement ps = con.prepareStatement("UPDATE reclamos SET fechaCreacion=?, fechaResolucion=?,domicilio=? WHERE idReclamo=?")){//here where user=? and password=?
-            fillPreparedStatement(ps, reclamo);
+            fillPreparedStatement(ps, reclamo);//pendiente categoria-domicilio
             ps.setInt(4, reclamo.getIdReclamo());
             reclModificados=ps.executeUpdate();
         }catch(SQLException ex){
@@ -73,11 +82,11 @@ public class ReclamoDAO {
     }
     
     public void eliminar (int id){
-        String sql = "DELETE FROM reclamos where idReclamo=?";//aCreacion, fechaResolucion, domicilio) 
+        String sql = "DELETE FROM reclamos where idReclamo=?";
         try{
            Connection con = Conexion.getConexion(DRIVER, URL, USER, PASS);
                        
-            PreparedStatement ps = con.prepareStatement(sql);// where where user=? and password=?
+            PreparedStatement ps = con.prepareStatement(sql);
            ps.setInt(1, id);
             ps.executeUpdate();
           
@@ -102,6 +111,12 @@ public class ReclamoDAO {
                 rec.setFechaCreacion(rs.getString(2));
                 rec.setFechaResolucion(rs.getString(3));
                 rec.setDomicilio(rs.getString(4));
+                
+                
+                rec.setCategoria(rs.getString(5));
+                rec.setDescripcion(rs.getString(6));
+                rec.setId_Persona(rs.getInt(7));
+                
             } catch (Exception e) {
                 throw new RuntimeException("Error SQL", e);
             }
@@ -133,9 +148,12 @@ public class ReclamoDAO {
                 rec.setIdReclamo(rs.getInt(1));
                 rec.setFechaCreacion(rs.getString(2));
                 rec.setFechaResolucion(rs.getString(3));
+                
                 rec.setDomicilio(rs.getString(4));
-                rec.setId_persona_user(rs.getInt(5));
-                if(id==rs.getInt(5)){//VER SI LO COMPARO IDPERSONA
+                rec.setCategoria(rs.getString(5));
+                rec.setDescripcion(rs.getString(6));
+                rec.setId_Persona(rs.getInt(7));
+                if(id==rs.getInt(7)){//VER SI LO COMPARO IDPERSONA
                 lista.add(rec);
                 }
                 
@@ -145,6 +163,21 @@ public class ReclamoDAO {
             throw new RuntimeException("Error al obtener reclamos");
         }
         return lista;
+    }
+
+    public int agregarCategoria(CategoriaDTO cat) {
+        int regtsAgr = 0;
+        String sql = "INSERT INTO categoria (nombre) VALUES(?);";
+        try{
+           Connection con = Conexion.getConexion(DRIVER, URL, USER, PASS);
+            
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, cat.getNombre());
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException("Error al agregar categoria");
+        }
+        return regtsAgr;
     }
        
 }

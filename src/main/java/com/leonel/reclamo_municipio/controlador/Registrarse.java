@@ -80,14 +80,11 @@ public class Registrarse extends HttpServlet {
                 cargarUsuarioSegunParams(us, request);
                 modeloLogin.agregarUsuario(us);
                 break;
-            
         }
         
         doGet(request, response);
     }
     
-    
-
     private void cargarPersonaSegunParams(PersonaDTO per, HttpServletRequest request) {
         per.setDni(request.getParameter("dni"));
         per.setNombre(request.getParameter("nombre"));
@@ -100,7 +97,7 @@ public class Registrarse extends HttpServlet {
     private void cargarUsuarioSegunParams(UsuarioDTO us, HttpServletRequest request) {
         us.setUser(request.getParameter("usuario"));
         us.setPassword(request.getParameter("password"));
-        us.setTipoUsuario("contribuyente");//al igresar mucha palabra se rompe
+        us.setTipoUsuario("contribuyente");
     }
     
 @Override

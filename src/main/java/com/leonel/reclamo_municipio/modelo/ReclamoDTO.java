@@ -8,30 +8,24 @@ public class ReclamoDTO  {//implements Serializable
     private String fechaCreacion;
     private String fechaResolucion;
     private String Domicilio;
-    private int idPersona;
-    private int id_persona_user;
+    private String categoria;
+    private String descripcion;
+    private int id_Persona;
+    
     
 
     public ReclamoDTO() {
     }
 
-    public ReclamoDTO(int idReclamo, String fechaCreacion, String fechaResolucion, String Domicilio, int idPersona) {
+    public ReclamoDTO(int idReclamo, String fechaCreacion, String fechaResolucion, String Domicilio, String categoria, String descripcion, int id_Persona) {
         this.idReclamo = idReclamo;
         this.fechaCreacion = fechaCreacion;
         this.fechaResolucion = fechaResolucion;
         this.Domicilio = Domicilio;
-        this.id_persona_user = id_persona_user;
-        
+        this.categoria = categoria;
+        this.descripcion = descripcion;
+        this.id_Persona = id_Persona;
     }
-
-    public int getId_persona_user() {
-        return id_persona_user;
-    }
-
-    public void setId_persona_user(int id_persona_user) {
-        this.id_persona_user = id_persona_user;
-    }
-    
 
     public int getIdReclamo() {
         return idReclamo;
@@ -65,14 +59,32 @@ public class ReclamoDTO  {//implements Serializable
         this.Domicilio = Domicilio;
     }
 
-    public int getIdPersona() {
-        return idPersona;
+    public String getCategoria() {
+        return categoria;
     }
 
-    public void setIdPersona(int idPersona) {
-        this.idPersona = idPersona;
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
     }
-    
-    
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public int getId_Persona() {
+        return id_Persona;
+    }
+
+    public void setId_Persona(int id_Persona) {
+        this.id_Persona = id_Persona;
+    }
+
+  
+
+   
     
 }

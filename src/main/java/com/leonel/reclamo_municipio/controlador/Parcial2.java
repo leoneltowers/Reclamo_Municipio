@@ -35,7 +35,7 @@ public class Parcial2 extends HttpServlet {
 
     
     private Modelo_Loggin usdao;
-    //UsuarioDTO us = new UsuarioDTO();
+    
     
     public void init()throws ServletException{
         this.usdao= new Modelo_Loggin();
@@ -94,7 +94,7 @@ public class Parcial2 extends HttpServlet {
             String pass=request.getParameter("txtpass");
             us=usdao.Validar(user, pass);
         
-          if(us.getUser()!=null){   
+          
             try {
                 request.setAttribute("usuario", us); 
                 request.getRequestDispatcher(us.getVista()).forward(request, response);
@@ -105,11 +105,11 @@ public class Parcial2 extends HttpServlet {
             request.getRequestDispatcher("index.jsp").forward(request, response);
             }
           }
-        }
+       
     }
     
     
-    
+    //if(us.getUser()!=null){    //}
             ///   if(us.getUser()!=null){
 //           request.setAttribute("usuario", us);    
 //          request.getRequestDispatcher(us.getVista()).forward(request, response);

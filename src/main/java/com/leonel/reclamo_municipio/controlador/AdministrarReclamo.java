@@ -4,6 +4,7 @@
  */
 package com.leonel.reclamo_municipio.controlador;
 
+import com.leonel.reclamo_municipio.modelo.CategoriaDTO;
 import com.leonel.reclamo_municipio.modelo.ReclamoDAO;
 import com.leonel.reclamo_municipio.modelo.ReclamoDTO;
 import java.io.IOException;
@@ -25,8 +26,7 @@ public class AdministrarReclamo extends HttpServlet {
     private final String URI_NO_RES = "WEB-INF/pages/admin/ResolverReclamo.jsp";
     private ReclamoDAO recdao;
     //ReclamoDTO rec = new ReclamoDTO();
-   
-    int ide;
+ 
     
     
     public void init()throws ServletException{
@@ -60,6 +60,7 @@ public class AdministrarReclamo extends HttpServlet {
         //String tipoModelo = request.getParameter("modelo");
         accion = accion == null ? "" : accion;
         ReclamoDTO recl;
+        int ide=0;//ultimo
         switch (accion) {
             
             case "listar":
@@ -82,10 +83,13 @@ public class AdministrarReclamo extends HttpServlet {
                 break;
             case "reclamosNoRes":
                 request.getRequestDispatcher(URI_NO_RES).forward(request, response); 
-                break;    
+                break;   
+            default:
+                request.getRequestDispatcher(URI_ADMIN_REC).forward(request, response); //PENDIENTE AL ACTUALIZAR. ERROR CON LISTAR DEF IN WHIT
+                //request.getRequestDispatcher("administrar?accion=listar").forward(request, response);  
         }
         
-        
+        doGet(request, response);
     }
 
     @Override
@@ -95,6 +99,8 @@ public class AdministrarReclamo extends HttpServlet {
         //String tipoModelo = request.getParameter("modelo");
         accion = accion == null ? "" : accion;
         ReclamoDTO recl;
+       
+        int ide=0;
         switch (accion) {
 
             case "update":
@@ -102,15 +108,9 @@ public class AdministrarReclamo extends HttpServlet {
                 recl = recdao.getReclamo(ide);
                 cargarReclamosegunParams(recl, request);
                 recdao.actualizar(recl);      
-                request.getRequestDispatcher("administrar?accion=listar").forward(request, response);
+                //request.getRequestDispatcher("administrar?accion=listar").forward(request, response);
                 break;
                 
-            case "add":
-                recl=new ReclamoDTO();
-                cargarReclamosegunParams(recl, request);
-                recdao.agregar(recl);
-                
-                break;
         }        
         doGet(request, response);
     }
