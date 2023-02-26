@@ -95,7 +95,37 @@ public class Modelo_Loggin {
         return usdto;
     }*/
     
+
+    //--------------------CREAR USUARIO UNION MYSQL-------------//
     
+    public int createUsuario(PersonaDTO pers, UsuarioDTO us){
+        int regtsAgr = 0;
+        String sql = "INSERT INTO personas (dni,nombre,apellido,mail,telefonoMovil) VALUES (?,?,?,?,?);";
+        String sql1 ="INSERT INTO usuario (user,password,tipoUsuario) VALUES (?,?,?);";
+        try{
+           Connection con = Conexion.getConexion(DRIVER, URL, USER, PASS);
+           
+            PreparedStatement ps = con.prepareStatement(sql);
+            fillPreparedStatemente(ps, pers);
+            ps.executeUpdate();
+            PreparedStatement psS = con.prepareStatement(sql1);
+            fillPreparedStatement(ps, us);
+   
+            psS.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException("Error al crear persona-usuario");
+        }
+        return regtsAgr;
+    }
+    ///aux--abajo version ant
+       private void fillPreparedStatemente(PreparedStatement ps, PersonaDTO pers)throws SQLException {
+         ps.setString(1, pers.getDni());
+         ps.setString(2, pers.getNombre());
+         ps.setString(3, pers.getApellido());
+         ps.setString(4, pers.getMail());
+         ps.setString(5, pers.getTelefonoMovil()); 
+         ///ps.setString(6,pers.getUsusario());// creo dos fill
+    } 
     
     //--------------------Crear Usuario-------------//
     
@@ -130,12 +160,12 @@ public class Modelo_Loggin {
     //---------------------persona--------------------
     public int agregarPersona (PersonaDTO pers){
         int regtsAgr = 0;
-        String sql = "INSERT INTO personas (dni,nombre,apellido,mail,telefonoMovil) VALUES (?,?,?,?,?);";
+        String sql = "INSERT INTO personas (dni,nombre,apellido,mail,telefonoMovil) VALUES (?,?,?,?,?);";//consulta union
         try{
            Connection con = Conexion.getConexion(DRIVER, URL, USER, PASS);
            
             PreparedStatement ps = con.prepareStatement(sql);
-            fillPreparedStatement(ps, pers); 
+            fillPreparedStatemente(ps, pers); 
             
 //            ps.setString(1, pers.getDni());
 //            ps.setString(2, pers.getNombre());
@@ -153,12 +183,12 @@ public class Modelo_Loggin {
     
     
     
-    private void fillPreparedStatement(PreparedStatement ps, PersonaDTO pers)throws SQLException {
-         ps.setString(1, pers.getDni());
-         ps.setString(2, pers.getNombre());
-         ps.setString(3, pers.getApellido());
-         ps.setString(4, pers.getMail());
-         ps.setString(5, pers.getTelefonoMovil()); 
-    }
+//    private void fillPreparedStatement(PreparedStatement ps, PersonaDTO pers)throws SQLException {
+//         ps.setString(1, pers.getDni());
+//         ps.setString(2, pers.getNombre());
+//         ps.setString(3, pers.getApellido());
+//         ps.setString(4, pers.getMail());
+//         ps.setString(5, pers.getTelefonoMovil()); 
+//    }
     
 }

@@ -108,13 +108,6 @@ public class Parcial2 extends HttpServlet {
        
     }
     
-    
-    //if(us.getUser()!=null){    //}
-            ///   if(us.getUser()!=null){
-//           request.setAttribute("usuario", us);    
-//          request.getRequestDispatcher(us.getVista()).forward(request, response);
-//           }else{request.getRequestDispatcher(URI_401).forward(request, response);}
-    
 
     @Override
     public String getServletInfo() {

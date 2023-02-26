@@ -73,13 +73,22 @@ public class Registrarse extends HttpServlet {
         switch (accion) {
             case "registrarse":
                 pers = new PersonaDTO();
+                UsuarioDTO us=null;
+                us = new Contribuyente();
+                cargarPersonaSegunParams(pers, request);
+                cargarUsuarioSegunParams(us, request);
+                modeloLogin.createUsuario(pers, us);
+                break;
+                
+            case "registrarse(default)":
+                pers = new PersonaDTO();
                 cargarPersonaSegunParams(pers, request);
                 modeloLogin.agregarPersona(pers);//crear modelo loggin default usuariodao
-                UsuarioDTO us=null;
+                //UsuarioDTO us=null;
                 us = new Contribuyente();
                 cargarUsuarioSegunParams(us, request);
                 modeloLogin.agregarUsuario(us);
-                break;
+                break;    
         }
         
         doGet(request, response);

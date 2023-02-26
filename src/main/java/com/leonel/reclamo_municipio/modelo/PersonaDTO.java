@@ -12,6 +12,12 @@ public class PersonaDTO {
 
     public PersonaDTO() {
     }
+// AGREGAR EN EL CONSTRUCTOR-- YAL CREAR PERSONA
+//    public PersonaDTO(UsuarioDTO ususario) {
+//        this.ususario = ususario;
+//    }
+//    
+    
 
     public PersonaDTO(int idPersona, String dni, String nombre, String apellido, String mail, String telefonoMovil) {
         this.idPersona = idPersona;
